@@ -7,5 +7,7 @@ import com.example.spring_docker.models.User;
 
 @Repository
 public interface userRepo extends JpaRepository<User, Integer>{
+
+    User findByEmail(String username);
     
 }
