@@ -1,10 +1,5 @@
 package com.example.spring_docker.controllers;
 
-import java.net.HttpCookie;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +13,6 @@ import com.example.spring_docker.models.User;
 import com.example.spring_docker.services.authService;
 import com.example.spring_docker.services.jwtService;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -39,34 +31,18 @@ public class authController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<tokenUser> Login(@RequestBody User input, HttpServletResponse response){
+    public ResponseEntity<tokenUser> Login(@RequestBody User input){
         User authUser = authService.login(input);
         tokenUser oUser = new tokenUser();
-        oUser.setId(authUser.getId());
-        oUser.setName(authUser.getName());
-        oUser.setRole(authUser.getRole());
-
         String jwtToken = jwtService.generateToken(authUser);
         oUser.setToken(jwtToken);
-
-        Cookie cookie = new Cookie("accessToken", jwtToken);
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(jwtService.getExpTime());
-        cookie.setSecure(true);
-        response.addCookie(cookie);
+        oUser.setExpiresIn(jwtService.getExpTime());
 
         return ResponseEntity.status(200).body(oUser); 
     }
 
     @DeleteMapping("/logout")
-    public ResponseEntity<String> Logout(HttpServletResponse response, HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        Cookie cookie = new Cookie("accessToken", "logout");
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(1);
-        cookie.setSecure(true);
-        response.addCookie(cookie);
-
+    public ResponseEntity<String> Logout(){
         return ResponseEntity.ok("Logout Successfully!");
     }
 }

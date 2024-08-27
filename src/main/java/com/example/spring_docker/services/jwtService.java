@@ -22,7 +22,7 @@ public class jwtService {
     private String secretKey;
 
     @Value("${security.jwt.expiration-time}")
-    private Integer jwtExp;
+    private Long jwtExp;
 
     public String extractUserName(String token){
         return extractClaim(token, Claims::getSubject);
@@ -41,11 +41,11 @@ public class jwtService {
         return buildToken(extractClaim, userDetails, jwtExp);
     }
 
-    public Integer getExpTime(){
+    public Long getExpTime(){
         return jwtExp;
     }
 
-    private String buildToken(Map<String,Object> extractClaim, UserDetails userDetails, Integer Exp){
+    private String buildToken(Map<String,Object> extractClaim, UserDetails userDetails, Long Exp){
         return Jwts.builder()
                     .claims()
                     .add(extractClaim)
