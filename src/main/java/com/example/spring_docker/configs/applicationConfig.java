@@ -10,12 +10,12 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.spring_docker.repositories.userRepo;
+import com.example.spring_docker.repositories.userRepository;
 
 @Configuration
 public class applicationConfig {
     @Autowired
-    private userRepo userRepo;
+    private userRepository userRepo;
 
     @Bean
     UserDetailsService userDetailsService(){

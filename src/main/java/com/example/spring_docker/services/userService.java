@@ -8,12 +8,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.spring_docker.models.User;
-import com.example.spring_docker.repositories.userRepo;
+import com.example.spring_docker.repositories.userRepository;
 
 @Service
 public class userService {
     @Autowired
-    private userRepo userRepo;
+    private userRepository userRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

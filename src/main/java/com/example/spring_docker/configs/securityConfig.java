@@ -34,7 +34,8 @@ public class securityConfig {
                     .authorizeHttpRequests(req -> req.requestMatchers("/api/v1/auth/**").permitAll()
                     .anyRequest().authenticated())
                     .httpBasic(Customizer.withDefaults())
-                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
+                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 
     @Bean
