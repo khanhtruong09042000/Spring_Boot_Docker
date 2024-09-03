@@ -47,7 +47,7 @@ public class customException {
         }
 
         if (exception instanceof NoSuchElementException) {
-            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(404), exception.getMessage());
+            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(400), exception.getMessage());
             errorDetail.setProperty("description", "Not found this id.");
         }
 
