@@ -1,5 +1,6 @@
 package com.example.spring_docker.models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,7 +33,7 @@ public class Product {
 
     @Column(nullable = true)
     private String name;
-    private double price = 0;
+    private BigDecimal price = BigDecimal.ZERO;
 
     @Column(nullable = true, length = 1000)
     private String descrition;
